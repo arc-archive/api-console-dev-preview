@@ -3,11 +3,12 @@ const {ApiConsoleDevPreview} = require('./lib/dev-preview');
 const prev = new ApiConsoleDevPreview({
   projectRoot: './test/api/',
   api: 'api.raml',
-  // projectRoot: './test/testcase-1/',
-  src: 'test/api-console-installed.zip',
+  src: './test/api-console-installed.zip',
   sourceIsZip: true,
   noBower: true,
-  verbose: false,
+  verbose: true,
   open: true
 });
-prev.run();
+prev.run()
+.then(() => console.log('The server is running now'))
+.catch(cause => console.error(cause));
