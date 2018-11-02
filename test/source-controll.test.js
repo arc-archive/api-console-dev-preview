@@ -19,29 +19,29 @@ describe('SourceControl', () => {
   };
 
   describe('createWorkingDir()', () => {
-    var processor;
+    let processor;
     beforeEach(function() {
       processor = new SourceControl(logger);
     });
 
     it('Creates a temporary location', function() {
       return processor.createWorkingDir()
-      .then(path => {
+      .then((path) => {
         assert.isString(path);
         return path;
       })
-      .then(path => processor.cleanup(path));
+      .then((path) => processor.cleanup(path));
     });
 
     // This is important for Polymer Builder.
     it('Temporary location is not a symbolic link', function() {
-      var _path;
+      let _path;
       return processor.createWorkingDir()
-      .then(p => {
+      .then((p) => {
         _path = p;
         return fs.stat(_path);
       })
-      .then(stats => {
+      .then((stats) => {
         assert.isFalse(stats.isSymbolicLink());
       })
       .then(() => processor.cleanup(_path));
@@ -49,15 +49,15 @@ describe('SourceControl', () => {
   });
 
   describe('cleanup()', () => {
-    var processor;
+    let processor;
     beforeEach(function() {
       processor = new SourceControl(logger);
     });
 
     it('Clears temportary location with files', function() {
-      var _path;
+      let _path;
       return processor.createWorkingDir()
-      .then(_p => {
+      .then((_p) => {
         _path = _p;
         return fs.writeFile(path.join(_p, 'test.log'), 'test', 'utf8');
       })

@@ -6,11 +6,9 @@ const fs = require('fs-extra');
 const path = require('path');
 
 describe('Dev preview', () => {
-
-  var processor;
+  let processor;
 
   describe('Constructor', function() {
-
     it('Throws an error for invalid options', function() {
       assert.throws(function() {
         new ApiConsoleDevPreview({
@@ -51,7 +49,7 @@ describe('Dev preview', () => {
 
   describe('printValidationErrors()', function() {
     it('Prints validation error to the logger.error', function() {
-      var calledCount = 0;
+      let calledCount = 0;
       const logger = {
         error: function() {
           calledCount++;
@@ -70,7 +68,7 @@ describe('Dev preview', () => {
 
   describe('printValidationWarnings()', function() {
     it('Prints validation error to the logger.error', function() {
-      var calledCount = 0;
+      let calledCount = 0;
       const logger = {
         warn: function() {
           calledCount++;
@@ -97,8 +95,8 @@ describe('Dev preview', () => {
     });
 
     it('sourceControl is the same object each time called', function() {
-      var t1 = processor.sourceControl;
-      var t2 = processor.sourceControl;
+      const t1 = processor.sourceControl;
+      const t2 = processor.sourceControl;
       assert.isTrue(t1 === t2);
     });
 
@@ -109,8 +107,8 @@ describe('Dev preview', () => {
 
     it('templatesProcessor is the same object each time called', function() {
       processor.sourceControl.workingDir = 'test';
-      var t1 = processor.templatesProcessor;
-      var t2 = processor.templatesProcessor;
+      const t1 = processor.templatesProcessor;
+      const t2 = processor.templatesProcessor;
       assert.isTrue(t1 === t2);
     });
 
@@ -119,8 +117,8 @@ describe('Dev preview', () => {
     });
 
     it('consoleSources is the same object each time called', function() {
-      var t1 = processor.consoleSources;
-      var t2 = processor.consoleSources;
+      const t1 = processor.consoleSources;
+      const t2 = processor.consoleSources;
       assert.isTrue(t1 === t2);
     });
 
@@ -129,8 +127,8 @@ describe('Dev preview', () => {
     });
 
     it('dataProvider is the same object each time called', function() {
-      var t1 = processor.dataProvider;
-      var t2 = processor.dataProvider;
+      const t1 = processor.dataProvider;
+      const t2 = processor.dataProvider;
       assert.isTrue(t1 === t2);
     });
   });
@@ -146,19 +144,19 @@ describe('Dev preview', () => {
 
     it('Sets tagVersion option', function() {
       processor.opts.tagVersion = '123';
-      var result = processor._sourcesProcessorOptions();
+      const result = processor._sourcesProcessorOptions();
       assert.equal(result.tagVersion, processor.opts.tagVersion);
     });
 
     it('Sets src option', function() {
       processor.opts.src = 'test';
-      var result = processor._sourcesProcessorOptions();
+      const result = processor._sourcesProcessorOptions();
       assert.equal(result.src, processor.opts.src);
     });
 
     it('Sets sourceIsZip option', function() {
       processor.opts.sourceIsZip = false;
-      var result = processor._sourcesProcessorOptions();
+      const result = processor._sourcesProcessorOptions();
       assert.equal(result.sourceIsZip, processor.opts.sourceIsZip);
     });
   });
@@ -170,7 +168,7 @@ describe('Dev preview', () => {
         src: 'test/api-console-installed.zip',
         sourceIsZip: true
       };
-      var workingDir;
+      let workingDir;
       before(function() {
         processor = new ApiConsoleDevPreview(options);
         return processor._sourcesToWorkingDirectory()
@@ -181,17 +179,17 @@ describe('Dev preview', () => {
 
       it('Creates temp dir', function() {
         return fs.pathExists(workingDir)
-        .then(exists => assert.isTrue(exists));
+        .then((exists) => assert.isTrue(exists));
       });
 
       it('Copies console files into the dir', function() {
         return fs.pathExists(path.join(workingDir, 'api-console.html'))
-        .then(exists => assert.isTrue(exists));
+        .then((exists) => assert.isTrue(exists));
       });
 
       it('Copies bower_components dir', function() {
         return fs.pathExists(path.join(workingDir, 'bower_components'))
-        .then(exists => assert.isTrue(exists));
+        .then((exists) => assert.isTrue(exists));
       });
     });
 
@@ -200,7 +198,7 @@ describe('Dev preview', () => {
       const options = {
         tagVersion: 'v4.0.0'
       };
-      var workingDir;
+      let workingDir;
       before(function() {
         processor = new ApiConsoleDevPreview(options);
         return processor._sourcesToWorkingDirectory()
@@ -211,20 +209,19 @@ describe('Dev preview', () => {
 
       it('Copies console files into the dir', function() {
         return fs.pathExists(path.join(workingDir, 'api-console.html'))
-        .then(exists => assert.isTrue(exists));
+        .then((exists) => assert.isTrue(exists));
       });
 
       it('Does not creates bower_components dir', function() {
         return fs.pathExists(path.join(workingDir, 'bower_components'))
-        .then(exists => assert.isFalse(exists));
+        .then((exists) => assert.isFalse(exists));
       });
     });
 
     describe('Latest release', function() {
       this.timeout(30000);
-      const options = {
-      };
-      var workingDir;
+      const options = {};
+      let workingDir;
       before(function() {
         processor = new ApiConsoleDevPreview(options);
         return processor._sourcesToWorkingDirectory()
@@ -235,12 +232,12 @@ describe('Dev preview', () => {
 
       it('Copies console files into the dir', function() {
         return fs.pathExists(path.join(workingDir, 'api-console.html'))
-        .then(exists => assert.isTrue(exists));
+        .then((exists) => assert.isTrue(exists));
       });
 
       it('Does not creates bower_components dir', function() {
         return fs.pathExists(path.join(workingDir, 'bower_components'))
-        .then(exists => assert.isFalse(exists));
+        .then((exists) => assert.isFalse(exists));
       });
     });
   });
@@ -256,7 +253,7 @@ describe('Dev preview', () => {
 
     it('Sets verbose option', function() {
       processor.opts.verbose = false;
-      var result = processor._createDepenencyManagerOptions();
+      const result = processor._createDepenencyManagerOptions();
       assert.isFalse(result.verbose);
     });
   });
@@ -267,7 +264,7 @@ describe('Dev preview', () => {
       src: 'test/api-console-master.zip',
       sourceIsZip: true
     };
-    var workingDir;
+    let workingDir;
     before(function(done) {
       processor = new ApiConsoleDevPreview(options);
       processor._sourcesToWorkingDirectory()
@@ -275,9 +272,7 @@ describe('Dev preview', () => {
         workingDir = processor.sourceControl.workingDir;
         done();
       })
-      .catch(e => {
-        done(e);
-      });
+      .catch((e) => done(e));
     });
 
     it('Installs dependencies', function(done) {
@@ -285,16 +280,14 @@ describe('Dev preview', () => {
       .then(() => {
         return fs.pathExists(path.join(workingDir, 'bower_components'));
       })
-      .then(exists => assert.isTrue(exists, 'bower_components exists'))
+      .then((exists) => assert.isTrue(exists, 'bower_components exists'))
       .then(() => {
         return fs.pathExists(path.join(workingDir, 'bower_components',
           'api-console', 'api-console.html'));
       })
-      .then(exists => assert.isTrue(exists, 'Copies api-console.html to bower_components'))
+      .then((exists) => assert.isTrue(exists, 'Copies api-console.html to bower_components'))
       .then(() => done())
-      .catch(e => {
-        done(e);
-      });
+      .catch((e) => done(e));
     });
 
     it('Skips dependencies for noBower option', function() {
@@ -304,7 +297,7 @@ describe('Dev preview', () => {
         return fs.pathExists(path.join(workingDir, 'bower_components',
           'api-console', 'api-console.html'));
       })
-      .then(exists => assert.isTrue(exists, 'Copies api-console.html to bower_components'));
+      .then((exists) => assert.isTrue(exists, 'Copies api-console.html to bower_components'));
     });
   });
 
@@ -315,7 +308,7 @@ describe('Dev preview', () => {
       sourceIsZip: true,
       noBower: true
     };
-    var workingDir;
+    let workingDir;
     before(function(done) {
       processor = new ApiConsoleDevPreview(options);
       processor._sourcesToWorkingDirectory()
@@ -323,12 +316,8 @@ describe('Dev preview', () => {
         workingDir = processor.sourceControl.workingDir;
         return processor._manageDependencies();
       })
-      .then(() => {
-        done();
-      })
-      .catch(e => {
-        done(e);
-      });
+      .then(() => done())
+      .catch((e) => done(e));
     });
 
     it('Copy template file', function() {
@@ -336,11 +325,11 @@ describe('Dev preview', () => {
       .then(() => {
         return fs.pathExists(path.join(workingDir, 'index.html'));
       })
-      .then(exists => assert.isTrue(exists, 'index.html exists'))
+      .then((exists) => assert.isTrue(exists, 'index.html exists'))
       .then(() => {
         return fs.readFile(path.join(workingDir, 'index.html'), 'utf8');
       })
-      .then(content => {
+      .then((content) => {
         let index = content.indexOf('bower_components/api-console/api-console.html');
         assert.isAbove(index, 0, 'Template paths are rewrited');
       });

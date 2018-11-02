@@ -20,7 +20,7 @@ describe('Communication bridge', () => {
       // console.info.apply(console, arguments);
     }
   };
-  var bridge;
+  let bridge;
   const PORT = 54321;
   const HOST = 'localhost';
   before(function() {
@@ -30,11 +30,11 @@ describe('Communication bridge', () => {
   describe('_getScriptContent()', function() {
     it('_readInjectScript() reads template file', function() {
       return bridge._readInjectScript()
-      .then(content => assert.typeOf(content, 'string'));
+      .then((content) => assert.typeOf(content, 'string'));
     });
 
     it('_injectScriptBootstrap() adds script init to the script', function() {
-      var content = 'abc';
+      let content = 'abc';
       content = bridge._injectScriptBootstrap(content);
 
       assert.isAbove(content.indexOf(HOST), 4);
@@ -42,7 +42,7 @@ describe('Communication bridge', () => {
     });
 
     it('_injectScriptBootstrap() produces valid output', function() {
-      var content = 'var abc;';
+      let content = 'var abc;';
       content = bridge._injectScriptBootstrap(content);
       babel.transform(content, {
         ast: false,
@@ -63,16 +63,16 @@ describe('Communication bridge', () => {
 
     it('_getScriptContent() return script string', function() {
       return bridge._getScriptContent()
-      .then(content => assert.typeOf(content, 'string'));
+      .then((content) => assert.typeOf(content, 'string'));
     });
   });
 
   describe('_createScriptText()', function() {
-    var node;
+    let node;
     const PARENT = 'TEST_PARENT';
     before(function() {
       return bridge._createScriptText(PARENT)
-      .then(def => node = def);
+      .then((def) => node = def);
     });
 
     it('Generated node is an object', function() {
@@ -93,11 +93,11 @@ describe('Communication bridge', () => {
   });
 
   describe('_createScriptNode()', function() {
-    var node;
+    let node;
     const PARENT = 'TEST_PARENT';
     before(function() {
       return bridge._createScriptNode(PARENT)
-      .then(def => node = def);
+      .then((def) => node = def);
     });
 
     it('Generated node is an object', function() {
@@ -142,12 +142,12 @@ describe('Communication bridge', () => {
 
     it('File exists', function() {
       return fs.pathExists(TMPFILE)
-      .then(exists => assert.isTrue(exists));
+      .then((exists) => assert.isTrue(exists));
     });
 
     it('Has the init script', function() {
       return fs.readFile(TMPFILE, 'utf8')
-      .then(content => {
+      .then((content) => {
         assert.isAbove(content.indexOf(HOST), 4);
         assert.isAbove(content.indexOf(PORT), 4);
       });
