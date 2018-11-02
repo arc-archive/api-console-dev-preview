@@ -21,28 +21,28 @@
     "dependencies"
   ],
   "author": "Pawel Psztyc, Advanced Rest Client Authors",
-  "license": "Apache-2.0 or CC-BY-4.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/mulesoft-labs/api-console-dev-preview/issues"
   },
   "homepage": "https://github.com/mulesoft-labs/api-console-dev-preview#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "api-console-builder-templates": "^0.1.0",
-    "api-console-dependency-manager": "^0.1.1",
+    "api-console-dependency-manager": "^0.1.2",
     "api-console-github-resolver": "^0.1.0",
     "api-console-sources-resolver": "^0.1.0",
-    "babel-core": "^6.25.0",
-    "babel-preset-env": "^1.6.0",
-    "fs-extra": "^3.0.0",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "parse5": "^3.0.2",
-    "polyserve": "^0.20.0",
-    "raml-js-data-provider": "^0.1.1",
-    "raml-json-enhance-node": "^0.3.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "fs-extra": "^7.0.0",
+    "gulp": "^4.0.0",
+    "parse5": "^5.1.0",
+    "polyserve": "^0.27.13",
+    "raml-js-data-provider": "^0.1.2",
+    "raml-json-enhance-node": "^0.3.2",
     "winston": "^2.3.1",
     "ws": "^3.1.0"
   },
