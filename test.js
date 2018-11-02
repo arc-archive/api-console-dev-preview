@@ -11,4 +11,4 @@ const prev = new ApiConsoleDevPreview({
 });
 prev.run()
 .then(() => console.log('The server is running now'))
-.catch(cause => console.error(cause));
+.catch((cause) => console.error(cause));
